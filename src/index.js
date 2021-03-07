@@ -3,13 +3,23 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 class Square extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: null,
+    };
+  }
+
   render() {
-      /* 下で呼ばれる時にvalueに入れてるのを、ここで使ってる */
     return (
       /* <button className="square" onClick={function() { alert("Hey!"); }}> */
       /* アロー関数構文を使ったonClick */
-	<button className="square" onClick={ () => alert('click') }>
-        {this.props.value}
+	<button 
+      className="square"
+      /* onClick={function() { {this.setState({value: 'X'})}; }} */
+      onClick={() => this.setState({value: 'X'})} /* 上のアローじゃないやつは動かなかった */
+	>
+        {this.state.value}
       </button>
     );
   }
