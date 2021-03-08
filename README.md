@@ -3,7 +3,7 @@
 ## 自分の React app を github pages で公開
 [React Github Pages](https://github.com/gitname/react-gh-pages) を参考
 
-自分の作ったページ https://kntkd.github.io/tic-tac-toe/
+[自分の作ったページ](https://kntkd.github.io/tic-tac-toe/)
 
 ## だいたいの実行コマンド
 1. cd your-react-app-dir
