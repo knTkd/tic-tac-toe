@@ -1,5 +1,27 @@
 # [Reactのtutorial](https://ja.reactjs.org/tutorial/tutorial.html) を実践してる
 
+## 自分の React app を github pages で公開
+[React Github Pages](https://github.com/gitname/react-gh-pages) を参考
+
+自分の作ったページ https://kntkd.github.io/tic-tac-toe/
+
+## だいたいの実行コマンド
+1. cd your-react-app-dir
+1. npm install gh-pages --save-dev
+1. package.jsonに追加
+> "homepage": "https://knTkd.github.io/repository-name"
+> "scripts": {
+>   //...
+>   "predeploy": "npm run build",
+>   "deploy": "gh-pages -d build"
+> }
+1. npm run deploy
+1. git add .
+1. git commit -m "publish to GitHub Pages"
+1. git push origin main
+1. Acssess https://gitname.github.io/repository-name !
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
