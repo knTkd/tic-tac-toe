@@ -1,4 +1,4 @@
-# [Reactのtutorial] (https://ja.reactjs.org/tutorial/tutorial.html) を実践してる
+# [Reactのtutorial](https://ja.reactjs.org/tutorial/tutorial.html) を実践してる
 
 # Getting Started with Create React App
 
