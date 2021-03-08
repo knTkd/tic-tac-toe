@@ -2,33 +2,69 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-class Square extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: null,
-    };
-  }
-
+class Reset extends React.Component {
   render() {
     return (
-      /* <button className="square" onClick={function() { alert("Hey!"); }}> */
-      /* アロー関数構文を使ったonClick */
+	<button
+      className="reset"
+      onClick={ () => this.props.onClick() }
+	>
+	Reset Button
+	</button>
+    );
+  }
+}
+
+class Square extends React.Component {
+  render() {
+    return (
 	<button 
       className="square"
-      /* onClick={function() { {this.setState({value: 'X'})}; }} */
-      onClick={() => this.setState({value: 'X'})} /* 上のアローじゃないやつは動かなかった */
+      onClick={ () => this.props.onClick() }
 	>
-        {this.state.value}
+        {this.props.value}
       </button>
     );
   }
 }
 
 class Board extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      squares: Array(9).fill(null),
+      count: 0,
+    };
+  }
+
+  handleClick(i) {
+    if (this.state.squares[i] != null)  return;
+    const newsquares = this.state.squares.slice();
+    let ch = 'X';
+    if (this.state.count % 2 == 0)  ch = 'O';
+    newsquares[i] = ch;
+    this.setState({squares: newsquares, count: this.state.count + 1});
+  }
+
+  handleReset() {
+    this.setState({squares: Array(9).fill(null), count: 0});
+  }
+
   renderSquare(i) {
-    /*    return <Square />; */
-    return <Square value={i} />; /* Square コンポーネントにprops(propaties)を渡した */
+    return (
+	<Square 
+      value={this.state.squares[i]}
+      onClick={ () => this.handleClick(i) }
+	/>
+    );
+  }
+
+  renderReset() {
+    return (
+      <Reset
+      onClick={ () => this.handleReset() }
+      />
+    );
   }
 
   render() {
@@ -52,6 +88,9 @@ class Board extends React.Component {
           {this.renderSquare(7)}
           {this.renderSquare(8)}
         </div>
+	<div className="resetButton">
+    	  {this.renderReset()}
+	</div>
       </div>
     );
   }
