@@ -20,7 +20,7 @@
 1. git commit -m "publish to GitHub Pages"
 1. git push origin main
 1. Acssess https://gitname.github.io/repository-name !
-
+(setting/github pages/source/branchをgh-pagesにする？（これは最後じゃないかも）)
 
 # Getting Started with Create React App
 
