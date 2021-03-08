@@ -2,30 +2,39 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-class Reset extends React.Component {
-  render() {
-    return (
-	<button
-      className="reset"
-      onClick={ () => this.props.onClick() }
-	>
-	Reset Button
-	</button>
-    );
-  }
+function Reset(props) {
+  return (
+      <button className="reset" onClick={props.onClick}>
+      ResetButtonnnnn
+    </button>    
+  );
 }
 
-class Square extends React.Component {
-  render() {
-    return (
-	<button 
-      className="square"
-      onClick={ () => this.props.onClick() }
-	>
-        {this.props.value}
+function Square(props) {
+  return (
+      <button className="square" onClick={props.onClick}>
+        {props.value}
       </button>
-    );
+  );
+}
+
+function calculateWinner(squares) {
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c])
+      return squares[a];
   }
+  return null;
 }
 
 class Board extends React.Component {
@@ -33,21 +42,25 @@ class Board extends React.Component {
     super(props);
     this.state = {
       squares: Array(9).fill(null),
-      count: 0,
+      turnCount: 0,
     };
   }
 
   handleClick(i) {
-    if (this.state.squares[i] != null)  return;
     const newsquares = this.state.squares.slice();
-    let ch = 'X';
-    if (this.state.count % 2 == 0)  ch = 'O';
-    newsquares[i] = ch;
-    this.setState({squares: newsquares, count: this.state.count + 1});
+    if (newsquares[i] != null || calculateWinner(newsquares))  return;
+//    let ch = 'X';
+    //    if (this.state.turnCount % 2 == 0)  ch = 'O';
+    //    newsquares[i] = ch;
+    newsquares[i] = (this.state.turnCount % 2 == 0 ? 'O' : 'X');
+    this.setState({
+      squares: newsquares,
+      turnCount: this.state.turnCount + 1,
+    });
   }
 
   handleReset() {
-    this.setState({squares: Array(9).fill(null), count: 0});
+    this.setState({squares: Array(9).fill(null), turnCount: 0});
   }
 
   renderSquare(i) {
@@ -68,8 +81,13 @@ class Board extends React.Component {
   }
 
   render() {
-    const status = 'Next player: X';
-
+    const winner = calculateWinner(this.state.squares);
+    let status;
+    if (winner) {
+      status = 'Winner : ' + winner + ' !';
+    } else {
+      status = 'Next Player: ' + (this.state.turnCount % 2 == 0 ? 'O' : 'X');
+    }
     return (
       <div>
         <div className="status">{status}</div>
@@ -89,7 +107,7 @@ class Board extends React.Component {
           {this.renderSquare(8)}
         </div>
 	<div className="resetButton">
-    	  {this.renderReset()}
+	{this.renderReset()} 
 	</div>
       </div>
     );
