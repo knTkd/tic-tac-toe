@@ -15,7 +15,7 @@
 >   "predeploy": "npm run build",
 >   "deploy": "gh-pages -d build"
 > }
-1. npm run deploy
+4. npm run deploy
 1. git add .
 1. git commit -m "publish to GitHub Pages"
 1. git push origin main
